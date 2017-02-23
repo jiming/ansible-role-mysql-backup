@@ -19,7 +19,7 @@
     - mysql-backup
 
 
-- include : install_mysqldump_secure.yml
-  tags    :
-    - install
-    - mysql-backup
+#- include : install_mysqldump_secure.yml
+#  tags    :
+#    - install
+#    - mysql-backup
