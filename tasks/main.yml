@@ -13,6 +13,31 @@
 #  when: ansible_os_family == "Debian"
 
 
+- name: Ensure backup directories
+  become: True
+  file:
+    state: directory
+    path: "{{ item }}"
+    owner: "{{ mysqlbackup_backupdir_owner }}"
+    group: "{{ mysqlbackup_backupdir_group }}"
+    mode: "{{ mysqlbackup_backupdir_permission }}"
+  with_items:
+    - "{{ mysqlbackup_backupdir_dump }}"
+    - "{{ mysqlbackup_backupdir_full }}"
+    - "{{ mysqlbackup_backupdir_inc }}"
+
+- name: Ensure backup crontab script directory
+  become: True
+  file:
+    state: directory
+    path: "{{ item }}"
+    owner: "{{ mysqlbackup_crontab_script_dir_owner }}"
+    group: "{{ mysqlbackup_crontab_script_dir_group }}"
+    mode: "{{ mysqlbackup_crontab_script_dir_permission }}"
+  with_items:
+    - "{{ mysqlbackup_crontab_script_dir }}"
+
+
 - include : install_xtrabackup.yml
 
 
